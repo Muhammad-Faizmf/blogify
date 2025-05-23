@@ -6,18 +6,22 @@
   </head>
   <body>
     <%- include("./partials/nav") %>
+    <% if (locals.message) { %>
+    <div class="container mt-4">
+      <div class="alert alert-success" role="alert"><%= locals.message %></div>
+    </div>
+    <% } %>
     <div class="container">
       <form action="/user/signup" method="POST">
         <div class="mb-3 mt-3">
-          <label for="fullName" class="form-label"
-            >Full Name</label
-          >
+          <label for="fullName" class="form-label">Full Name</label>
           <input
             type="text"
-             id="fullName"
+            id="fullName"
             name="fullName"
-            class="form-control"    
-          />    
+            class="form-control"
+            required
+          />
         </div>
         <div class="mb-3">
           <label for="exampleInputEmail1" class="form-label"
@@ -29,6 +33,7 @@
             class="form-control"
             id="exampleInputEmail1"
             aria-describedby="emailHelp"
+             required
           />
           <div id="emailHelp" class="form-text">
             We'll never share your email with anyone else.
@@ -41,6 +46,7 @@
             name="password"
             class="form-control"
             id="exampleInputPassword1"
+             required
           />
         </div>
         <button type="submit" class="btn btn-primary mt-3">Submit</button>

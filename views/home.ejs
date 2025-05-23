@@ -3,23 +3,39 @@
   <head>
     <%- include("./partials/head") %>
     <title>Homepage</title>
+    <style>
+      .blog-body {
+        white-space: normal;
+        overflow: hidden;
+        display: -webkit-box;
+        -webkit-line-clamp: 3; 
+        -webkit-box-orient: vertical;
+        text-overflow: ellipsis;
+      }
+    </style>
   </head>
   <body>
     <%- include("./partials/nav") %>
-    <div class="container mt-3">
-      <% blogs.forEach(blog => { %>
-      <div class="card" style="width: 18rem">
-      <img src="<%= blog.coverImageURL %>" class="card-img-top" alt="..." />
-
-        <div class="card-body">
-          <h5 class="card-title"><%= blog.title %></h5>
-          <p class="card-text">
-           <%= blog.body %>
-          </p>
-          <a href="/blog/<%= blog._id %>" class="btn btn-primary">View</a>
+    <div class="container mt-5">
+      <div class="row row-cols-1 row-cols-md-3 g-4">
+        <% blogs.forEach(blog => { %>
+        <div class="col">
+          <div class="card h-100">
+            <img
+              src="<%= blog.coverImageURL %>"
+              class="card-img-top"
+              height="200px"
+              alt="..."
+            />
+            <div class="card-body">
+              <h5 class="card-title"><%= blog.title %></h5>
+              <p class="card-text blog-body"><%= blog.body %></p>
+              <a href="/blog/<%= blog._id %>" class="btn btn-primary">View</a>
+            </div>
+          </div>
         </div>
+        <% }) %>
       </div>
-      <% }) %>
     </div>
     <%- include("./partials/scripts") %>
   </body>

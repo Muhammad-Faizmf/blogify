@@ -1,3 +1,5 @@
+require("dotenv").config();
+
 const express = require("express");
 const path = require("path");
 const userRouter = require("./routes/user");
@@ -10,7 +12,8 @@ const {
 } = require("./middlewares/authentication");
 
 const app = express();
-const PORT = 5000;
+
+const PORT = process.env.PORT || 5000;
 
 // JSON parsing
 // app.use(express.json());
@@ -24,7 +27,10 @@ app.set("view engine", "ejs");
 app.set("views", path.resolve("./views"));
 
 // Connection MongoDB
-connectMongoDB("")
+connectMongoDB(process.env.MONGO_URL, {
+  useNewUrlParser: true,
+  useUnifiedTopology: true,
+  })
   .then(() => console.log("MongoDB connected"))
   .catch((e) => console.log(e));
 

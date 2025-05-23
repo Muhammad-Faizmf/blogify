@@ -24,9 +24,17 @@ router.post("/signin", async (req, res) => {
 });
 
 router.post("/signup", async (req, res) => {
-  const { fullName, email, password } = req.body;
-  const user = await User.create({ fullName, email, password });
-  return res.render("home");
+  try {
+    const { fullName, email, password } = req.body;
+    const user = await User.create({ fullName, email, password });
+    return res.render("signup", {
+      message: "Your account has been created successfully!. Please log in",
+    });
+  } catch (error) {
+    return res.render("signup", {
+      message: error,
+    });
+  }
 });
 
 router.get("/logout", (req, res) => {
